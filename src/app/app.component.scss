@@ -12,6 +12,8 @@
 
 .card {
     position: relative;
+    display: flex;
+    flex-direction: row;
     width: 450px;
     height: 502px;
     padding: 48px 40px 36px 40px;
@@ -20,38 +22,38 @@
     overflow: hidden;
 }
 
-.pageOne{
-    position: relative;
-    transition: 0.5s;
+.all {
+    margin-bottom: 33px;
 }
-// .pageTwo{
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     background: green;
-//     right: 0px;
-// }
-.loading{
+
+.pageOne {
+    position: relative;
+}
+
+#pageOne {
+    transition: 0.3s ease-out;
+}
+
+.loading {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(252, 250, 250, 0.24);
-    z-index: 2;
+    z-index: 10;
 }
+
 a {
     text-decoration: none;
 }
 
-.all {
-    margin-bottom: 24px;
-}
-
 .card .img {
+    position: relative;
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: -15px;
 }
 
 .card .img img {
@@ -65,25 +67,24 @@ a {
     align-items: center;
     flex-direction: column;
     font-size: 24px;
-    padding: 4px;
-    font-weight: lighter;
+    padding: 12px;
     color: #202124;
+    font-weight: 500;
 }
 
 .card .title span {
     height: 32px;
 }
 
-.card .title span:nth-child(2) {
+.card .title .useGoogleAccount {
     height: 24px;
     font-size: 16px;
     color: #202124;
     line-height: 1.3333;
-    padding-top: 8px;
 }
 
 
-.card .input {
+.input {
     width: 100%;
     height: 210px;
     color: #1a73e8;
@@ -93,17 +94,24 @@ a {
     justify-content: space-between;
 }
 
-.card .input input {
-    box-shadow: none;
+input {
+    box-shadow: none !important;
 }
 
-.card .input input:focus {
+input:focus {
     border-width: 2px;
     border-color: #1a73e8;
 }
 
-.card .input label {
+label {
     color: gray;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.input p {
+    margin-top: -6px;
 }
 
 p {
@@ -142,7 +150,7 @@ p {
     margin: 0;
 }
 
-.buttons .btnCreateAccount {
+.buttons button:nth-child(1) {
     outline: none;
     border: none;
     background: none;
@@ -165,14 +173,116 @@ p {
     opacity: 0;
 }
 
-.show{
+.show {
     opacity: 1 !important;
 }
 
-.mat-primary{
+.mat-primary {
     --mdc-linear-progress-active-indicator-color: #1a73e8;
 }
 
+// Página dos
+
+.pageTwo {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    padding: 50px 40px 0px 40px;
+    transition: 0.2s ease-out;
+    right: -100%;
+    bottom: 0;
+}
+
+.checkboxContainer {
+    width: 100%;
+    margin-top: -5px;
+    display: flex;
+    padding-left: 10px;
+}
+
+.checkboxContainer .form-check {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+}
+
+.checkboxContainer label {
+    color: #202124;
+    font-size: 14px;
+}
+
+.checkboxContainer .form-check-input {
+    cursor: pointer;
+    font-size: 19px;
+    border-color: #5f6368;
+    border-width: 2px;
+    border-radius: 2px;
+}
+
+.checkboxContainer .form-check-input:checked {
+    border: none !important;
+}
+
+.checkboxContainer .form-check-input:active {
+    background: 0px 0px 20px #e8f0fe;
+}
+
+.buttonsPass {
+    margin-top: 45px;
+}
+
+.emailGoogleAccount,
+.emailGoogleAccount a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #3c4043;
+    margin-top: 8px;
+}
+
+.emailGoogleAccount .contenido {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border: 1px #3a35353f solid;
+    border-radius: 20px;
+    padding: 0px 5px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.emailGoogleAccount .contenido i {
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.emailGoogleAccount .contenido .bi-caret-down-fill {
+    font-size: 13px;
+}
+
+.emailGoogleAccount .contenido p {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    padding: 0;
+    margin: 0;
+}
+
+.invalid {
+    border-color: var(--bs-danger);
+}
+
+.invalid:focus {
+    border-color: var(--bs-danger);
+}
+
+.invalid label {
+    color: var(--bs-danger) !important;
+}
 
 footer {
     position: relative;
@@ -201,6 +311,54 @@ footer .footer {
     cursor: pointer;
     color: #3c4043;
 }
-.footer .opciones span a{
+
+.footer .opciones span a {
     color: #3c4043;
+}
+
+// RESPONSIVE
+@media screen and (max-width: 595px) {
+    .all {
+        width: 100%;
+    }
+
+    .card {
+        padding: 48px 10px 36px 10px;
+        width: 100%;
+        border: none;
+        box-shadow: none;
+    }
+
+    .title {
+        font-weight: 300 !important;
+    }
+
+    .pageOne {
+        width: 100%;
+    }
+
+    .pageTwo {
+        padding: 50px 10px 0px 10px;
+    }
+
+    .contenedor {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .alignCenterFooter {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        bottom: 10px;
+    }
+
+    footer {
+        position: relative;
+        width: 90%;
+        bottom: 20px;
+        margin-bottom: 0;
+    }
 }

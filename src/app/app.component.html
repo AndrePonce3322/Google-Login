@@ -2,82 +2,149 @@
 
 
   <div class="all">
-    <div class="card">
 
+    <form [formGroup]="FormAccount">
 
-      <div [ngClass]="{'loading': show}"></div>
-      <div class="progressBar" [ngClass]="{'show':show}">
-        <mat-progress-bar mode="indeterminate" class="mat-primary"></mat-progress-bar>
-      </div>
+      <div class="card">
 
-      <div class="pageOne" id="pageOne">
-
-        <div class="img">
-          <img src="https://www.vectorlogo.zone/logos/google/google-ar21.svg">
+        <div [ngClass]="{'loading': show}"></div>
+        <div class="progressBar" [ngClass]="{'show':show}">
+          <mat-progress-bar mode="indeterminate" class="mat-primary"></mat-progress-bar>
         </div>
-        <div class="title">
-          <span>Sign in</span>
-          <span>Use your Google Account</span>
-        </div>
-        <div class="input">
-          <div>
-            <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-              <label for="floatingInput">Email or phone</label>
+
+        <div class="pageOne">
+          <div class="img">
+            <img src="https://www.vectorlogo.zone/logos/google/google-ar21.svg">
+          </div>
+          <div class="title">
+            <span>{{titleFromPages}}</span>
+            <span class="useGoogleAccount" *ngIf="!boolean">Use your Google account</span>
+
+            <div class="emailGoogleAccount" *ngIf="boolean">
+              <a
+                href="https://accounts.google.com/AddSession/signinchooser?service=accountsettings&continue=https%3A%2F%2Fmyaccount.google.com%2F&ec=GAlAwAE&hl=en&authuser=0&flowName=GlifWebSignIn&flowEntry=AddSession&cid=1&TL=ALbfvL3_ZiNZ6F1cjvGLCPSciUqfM1SBUypg1hgZtsxtaZ2iQHHN9MkHJuNXWHS_">
+
+                <div class="contenido">
+                  <i class="bi bi-person-circle"></i>
+                  <p>{{email}}</p>
+                  <span class="material-symbols-outlined"
+                    style="display: flex; justify-content: center; align-items: center;"></span>
+                </div>
+              </a>
+
             </div>
-            <p>
-              <a
-                href="https://accounts.google.com/signin/v2/usernamerecovery?hl=en&continue=http%3A%2F%2Fsupport.google.com%2Faccounts%2Fanswer%2F27441%3Fhl%3Den&ec=GAlAdQ&authuser=0&flowName=GlifWebSignIn&flowEntry=AddSession">
-                Forgot email?
-              </a>
-            </p>
+
           </div>
-          <div class="notComputer">
-            <span>Not your computer? Use Guest mode to sign in privately.</span>
-            <p><a href="https://support.google.com/chrome/answer/6130773?hl=en">Learn
-                more</a>
-            </p>
+
+          <div id="pageOne">
+
+            <div class="input">
+              <div>
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" name="email" placeholder="." required formControlName="email"
+                    [ngClass]="{'invalid': formInvalid}" (keydown.enter)="next()" autocomplete="off">
+                  <label for="floatingInput">Email or phone</label>
+                </div>
+
+                <p style="color: var(--bs-danger); display: flex; gap: 10px; user-select: none; cursor: default;"
+                  *ngIf="formInvalid">
+                  <i class="bi bi-exclamation-circle-fill"></i>
+                  <span style="font-size: 11px;">Enter a valid email or phone number</span>
+                </p>
+
+                <p>
+                  <a
+                    href="https://accounts.google.com/signin/v2/usernamerecovery?hl=en&continue=http%3A%2F%2Fsupport.google.com%2Faccounts%2Fanswer%2F27441%3Fhl%3Den&ec=GAlAdQ&authuser=0&flowName=GlifWebSignIn&flowEntry=AddSession">
+                    Forgot email?
+                  </a>
+                </p>
+              </div>
+              <div class="notComputer">
+                <span>Not your computer? Use Guest mode to sign in privately.</span>
+                <p><a href="https://support.google.com/chrome/answer/6130773?hl=en">Learn
+                    more</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="buttons">
+              <button type="button">
+                <p>
+                  <a
+                    href="https://accounts.google.com/signup/v2/webcreateaccount?continue=http%3A%2F%2Fsupport.google.com%2Faccounts%2Fanswer%2F27441%3Fhl%3Den&hl=en&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp">Create
+                    account
+                  </a>
+                </p>
+              </button>
+              <button class="btn btn-primary" (click)="next()" type="button">
+                <p>Next</p>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div class="buttons">
-          <button class="btnCreateAccount">
-            <p>
-              <a
-                href="https://accounts.google.com/signup/v2/webcreateaccount?continue=http%3A%2F%2Fsupport.google.com%2Faccounts%2Fanswer%2F27441%3Fhl%3Den&hl=en&biz=false&flowName=GlifWebSignIn&flowEntry=SignUp">Create
-                account
-              </a>
-            </p>
-          </button>
-          <button class="btn btn-primary" (click)="next()">
-            <p>Next</p>
-          </button>
+        <div class="pageTwo" id="pageTwo">
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="password" placeholder="." formControlName="password"
+              id="password" required [ngClass]="{'invalid': formInvalid}">
+            <label for="floatingInput">Enter your password</label>
+          </div>
+
+          <!-- WRONG PASSWORD ALERT -->
+          <p style="color: var(--bs-danger); display: flex; gap: 10px; user-select: none; cursor: default; margin-top: -10px;"
+          *ngIf="formInvalid"
+          >
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <span style="font-size: 11px;">Wrong password. Try again or click Forgot password to reset it.</span>
+          </p>
+
+          <div class="checkboxContainer">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" #showPassword (change)="ShowPassword(showPassword)">
+              <label class="form-check-label" for="flexCheckDefault">
+                Show password
+              </label>
+            </div>
+          </div>
+
+          <div class="buttons buttonsPass">
+            <button class="btn">
+              <p>
+                <a href="https://accounts.google.com/signin/recovery">
+                  Forgot password?
+                </a>
+              </p>
+            </button>
+            <button class="btn btn-primary" (click)="Go()">
+              <p>
+                Next
+              </p>
+            </button>
+          </div>
+
         </div>
+
       </div>
+    </form>
 
-      <!-- <div class="pageTwo">
-        <h2>Hola</h2>
-      </div> -->
+    <div class="alignCenterFooter">
+      <footer>
+        <div class="footer">
 
+          <div class="idioma">
+            <span style="cursor: pointer;">English (United States)<i class="bi bi-caret-down-fill"
+                style="font-size: 10px; margin-left: 8px;"></i></span>
+          </div>
 
+          <div class="opciones">
+            <span><a href="https://support.google.com/accounts?hl=en&p=account_iph">Help</a></span>
+            <span><a href="https://accounts.google.com/TOS?loc=HN&hl=en&privacy=true">Privacy</a></span>
+            <span><a href="https://accounts.google.com/TOS?loc=HN&hl=en">Terms</a></span>
+          </div>
+
+        </div>
+      </footer>
     </div>
-
-    <footer>
-      <div class="footer">
-
-        <div class="idioma">
-          <span style="cursor: pointer;">English (United States)<i class="bi bi-caret-down-fill"
-              style="font-size: 10px; margin-left: 8px;"></i></span>
-        </div>
-
-        <div class="opciones">
-          <span><a href="https://support.google.com/accounts?hl=en&p=account_iph">Help</a></span>
-          <span><a href="https://accounts.google.com/TOS?loc=HN&hl=en&privacy=true">Privacy</a></span>
-          <span><a href="https://accounts.google.com/TOS?loc=HN&hl=en">Terms</a></span>
-        </div>
-
-      </div>
-    </footer>
   </div>
 
 </div>
