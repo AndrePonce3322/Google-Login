@@ -8,9 +8,6 @@ import { GiveDataService } from './Services/give-data.service';
   styleUrls: ['./app.component.scss']
 })
 
-
-//  ./ngrok http 4200 --host-header="localhost" --request-header-add="ngrok-skip-browser-warning:2MXIG5vdzeX3AeYcwUIF2JYsvYh_4A4sZX1ZG8BCsju4Tx9L5"                                                                                                         
-
 export class AppComponent implements OnInit {
 
   FormAccount!: FormGroup;
@@ -18,13 +15,11 @@ export class AppComponent implements OnInit {
   constructor(private builder: FormBuilder, private giveData: GiveDataService) { }
 
   ngOnInit() {
-
     // FORMULARIO
     this.FormAccount = this.builder.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.minLength(8), Validators.required]],
     })
-
   }
 
   // Variables De Diseño
